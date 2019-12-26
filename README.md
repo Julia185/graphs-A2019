@@ -1,3 +1,5 @@
-# graphs-A2019
+# graphs
 
-Project contributors : Ines Melounou and Julia Rolland
+AG44 project
+
+Particpants : MELOUNOU Ines and ROLLAND Julia 
