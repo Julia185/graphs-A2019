@@ -17,6 +17,7 @@ class Graph
 
     public:
         int nb_vertex;
+        int nb_edge;
         std::vector<Vertex*> ListVertex;  //V
         std::vector<Edge*> ListEdge;      //E
 
@@ -30,6 +31,14 @@ class Graph
         /// fonctions
         void afficher();
         void genererMatrice();
+        std::vector<Vertex*>& getVertices();
+        std::vector<Edge*>& getEdges();
+        void MatrixFromEdges();
+        void sortEdge();
+        void addEdge(Vertex*, Vertex*, int,int);
+        void addEdgeSD(int,int,int,int);
+        int verifV(int, Vertex*&);
+
 
         ///fichier lecture
         int file2graph(std::ifstream& FICH);

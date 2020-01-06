@@ -90,6 +90,96 @@ Graph::~Graph(){
     delete[] Adj;
 }
 
+///REVOIR CES 2 FONCTIONS
+
+vector<Vertex*>& Graph::getVertices() {
+    return ListVertex;
+}
+
+vector<Edge*>& Graph::getEdges() {
+    return ListEdge;
+}
+
+
+/*
+///Création d'une matrice à partir de la liste d'Edges
+void Graph::MatrixFromEdges(Graph G) {
+    cout << "Creation of the matrix from the edges : " << endl;
+
+    for(int i = 0; i<G.nb_vertex; ++i)
+    {
+        Vertex* v = new Vertex(i, 0, 0);
+        ListVertex.push_back(v);
+    }
+
+    Matrix = new int* [G.nb_vertex];
+
+    for(int i = 0; i < nb_vertex(); ++i) {
+        Matrix[i] = new int[nb_vertex];
+    }
+
+    for(int i = 0; i<nb_edges();i++)
+    {
+        Matrix[listEdge[i].get_src().iden()-1][listEdge[i].get_dest().iden()-1]=listEdge[i].get_cost();
+        //cout<<listEdge[i].get_cost();
+    }
+}
+*/
+///Fonction qui trie ordre croissant
+void Graph::sortEdge() {
+    int length = nb_edge;
+
+    for (int i = 0; i < length-1; ++i) {
+        for (int j = 0; j < length-1-i; ++j) {
+            if ((ListEdge[j]->cost) > (ListEdge[j+1]->cost)) {
+                Edge* p = ListEdge[j+1];
+                ListEdge[j+1] = ListEdge[j];
+                ListEdge[j] = p;
+            }
+        }
+    }
+}
+
+
+///Fonction qui vérifie qu'un vertex est bien dans la liste
+int Graph::verifV(int ID, Vertex*& v){
+    for(int i=0; i<nb_vertex; ++i) {
+        if (ListVertex[i]->id == ID) {
+            v = ListVertex[i];
+            return 1;
+        }
+    }
+    return 0;
+}
+
+
+/*
+///Fonction qui ajoute un Edge dans la liste
+void Graph::addEdge(Vertex* src, Vertex* dest, int cost, int id) {
+    //création d'un edge
+    Edge* e = new Edge(id, src, dest, cost);
+    //ajout dans la liste
+    ListEdge.push_back(e);
+}
+
+
+
+///Fonction qui utilise addEdge
+void Graph::addEdgeSD(int src,int dest,int cost, int id){
+
+    ListVertex[src-1].add_nei(dest);
+
+    //création des deux vertices
+    Vertex* v1 = new Vertex(id, cost, );
+    Vertex* v2 = new Vertex();
+
+    //on vérifie qu'ils existent
+    verifV(src,v1);
+    verifV(dest,v2);
+
+    addEdge(v1, v2, cost, id);
+}
+*/
 
 ///fonction qui détecte la fin d'une ligne dans un fichier
 bool endLine (ifstream& fichier){

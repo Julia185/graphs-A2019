@@ -40,9 +40,6 @@ class MinHeap
         void AddElement(int);
         int TakeMin();
 
-
-
-
 };
 
 #endif // MINHEAP_H

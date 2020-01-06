@@ -52,6 +52,7 @@
 		<Unit filename="TopologicalSort.h" />
 		<Unit filename="Vertex.cpp" />
 		<Unit filename="Vertex.h" />
+		<Unit filename="kruskal.cpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<envvars />

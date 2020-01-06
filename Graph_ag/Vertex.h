@@ -14,7 +14,8 @@ class Vertex
         int* voisin;
 
         //attribute
-        Vertex(int, int, int);
+        Vertex(int,int,int);
+        Vertex(){};
         virtual ~Vertex();
 
         //functions

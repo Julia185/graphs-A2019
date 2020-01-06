@@ -5,7 +5,6 @@
 
 class Edge
 {
-
     public:
         //members
         int id;
@@ -13,9 +12,14 @@ class Edge
         Vertex* source;
         Vertex* destination;
 
+
         //constructor
         Edge(int, int, Vertex*, Vertex*);
         ~Edge();
+
+        //functions
+        Vertex& getSrc(){return *source;}
+        Vertex& getDest(){return *destination;}
 };
 
 #endif // EDGE_H

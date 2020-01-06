@@ -33,7 +33,7 @@ int main()
 
     Dijkstra(B,0);//si affiche INF = infini
 
-    TopologicalSort(B);
+    //TopologicalSort(B);
 
     /**MinHeap h(B); //construct add(i)--> avoir voisin
 
