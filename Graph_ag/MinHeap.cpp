@@ -1,11 +1,14 @@
 #include "MinHeap.h"
 #include "Graph.h"
 #include "BFS.h"
+#include <vector>
+#include "Edge.h"
 
 #include<iostream>
 
 using namespace std;
 
+/*
 ///-------Constructor--------------
 MinHeap::MinHeap(Graph* G){
     nb_element = 0;
@@ -17,6 +20,114 @@ MinHeap::MinHeap(Graph* G){
 MinHeap::~MinHeap(){
     delete [] table;
 }
+*/
+
+
+MinHeap::MinHeap(vector<Edge*> vect, int cap, int nbE) {
+	int i;
+	table = new Edge[cap];
+	this->capacity = cap;
+	this->nb_element = nbE;
+
+	for(i = 0; i < nbE; ++i) {
+		table[i] = vect[i];
+	}
+
+	//int j = (nb_element - 2) / 2;
+
+	while (i >= 0) {
+		travDown(i);
+		--i;
+	}
+}
+
+
+void MinHeap::travDown(int id) {
+    Edge t = table[id];
+
+    int j = 2*id+1;
+
+    while (j <= (nb_element-1)) {
+            if (j < (nb_element-1) && (table[j].cost > table[j+1].cost)) {
+                j++;
+            }
+
+            if (t.cost >= table[j].cost) {
+                break;
+            }
+            else {
+                table[id] = table[j];
+                id = j;
+                j= 2*j+1;
+            }
+
+            table[id] = t;
+    }
+}
+
+
+bool MinHeap::isEmpty(){
+    if (nb_element == 0) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+
+bool MinHeap::isFull(){
+    if (nb_element == capacity){
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+
+void MinHeap::Insert(Edge& e) {
+	if(isFull()) {
+        return;
+	}
+	else {
+        table[nb_element] = e;
+        TravUp(nb_element);
+        ++nb_element;
+	}
+}
+
+
+void MinHeap::TravUp(int id) {
+	Edge point;
+
+	while (id > 0) {
+		if (table[(id-1)/2].cost > table[id].cost)
+		{
+			point = table[id];
+			table[id] = table[(id-1)/2];
+			table[(id-1)/2] = point;
+		}
+		else break;
+
+		id = (id-1)/2;
+	}
+}
+
+void MinHeap::deleteMin() {
+	if (nb_element == 0) {
+            return;
+	}
+
+	table[0] = table[nb_element-1];
+	travDown(0);
+	--nb_element;
+}
+
+
+
+
+/*
 
 MinHeap& MinHeap::createMinHeap(Graph* G)//en fait minheap possède 2 argument (src,dist)
 {
@@ -118,7 +229,7 @@ void MinHeap::AddElement(int k)
 
 int MinHeap::TakeMin(){
 
-    if (IsEmpty()) cout<<"Empty heap"<<endl;
+    if (isEmpty()) cout<<"Empty heap"<<endl;
 
     // Store the minimum value, and remove it from heap
     int root = table[1];
@@ -131,5 +242,5 @@ int MinHeap::TakeMin(){
 
 
 
-
+*/
 

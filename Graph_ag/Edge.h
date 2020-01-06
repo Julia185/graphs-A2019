@@ -14,8 +14,10 @@ class Edge
 
 
         //constructor
+        Edge();
         Edge(int, int, Vertex*, Vertex*);
         ~Edge();
+        Edge& operator=(const Edge&);
 
         //functions
         Vertex& getSrc(){return *source;}

@@ -35,16 +35,16 @@ int main()
 
     //TopologicalSort(B);
 
-    /**MinHeap h(B); //construct add(i)--> avoir voisin
+   /* MinHeap(B.ListEdge, B.nb_vertex, B.nb_edge); //construct add(i)--> avoir voisin
 
 
-cout<<"\n MinHeap  " ;
-for (int i =1;i<=h.nb_element;i++)
+    cout<<"\n MinHeap  " ;
+    for (int i =1;i<=h.nb_element;i++)
     {
         cout<<h.table[i]<<" | ";
-    }*/
+    }
 
-    ///Floyd_Warshall(B);
+    ///Floyd_Warshall(B); */
 
     return 0;
 }
