@@ -26,7 +26,8 @@ class MinHeap
         void Insert(Edge&);
 
         void deleteMin();
-        Edge& getMin();
+        int getMin();
+        Edge& TakeMin();
 
         bool isEmpty();
         bool isFull();
@@ -46,8 +47,6 @@ class MinHeap
 
         ///--------Insert/delete
         void AddElement(int);
-        int TakeMin();
-
 };
 
 #endif // MINHEAP_H

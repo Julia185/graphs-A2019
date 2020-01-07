@@ -26,7 +26,7 @@ int kruskal(Graph& G) {
 	Edge t;
 
 	while (compteur != G.ListVertex.size()-1) {
-		t = MH.getMin();
+		t = MH.TakeMin();
 
 		if (ds.diff(t.destination->id, t.source->id)) {//if in different sets
 			cout << "Edge: " << t.id << ",Weight: " << t.cost << ",Connecting vertex " << t.source->id+1 << ",vertex " << t.destination->id+1 << endl;

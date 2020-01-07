@@ -26,13 +26,17 @@ class Graph
         /// Construtor
         Graph(int nb_vertex);
         Graph();
+        Graph(const Graph& other);
         virtual ~Graph();
 
         /// fonctions
         void afficher();
+        void genererDistVertex();
         void genererMatrice();
+
         std::vector<Vertex*>& getVertices();
         std::vector<Edge*>& getEdges();
+
         void MatrixFromEdges();
         void sortEdge();
         void addEdge(Vertex*, Vertex*, int,int);

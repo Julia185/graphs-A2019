@@ -319,16 +319,16 @@
 	"Graph.h"
 	<stack>
 
-1578296950 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\bfs.cpp
+1578384605 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\bfs.cpp
 	"BFS.h"
 	"Graph.h"
 	<iostream>
 
-1578296950 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\bfs.h
+1578384605 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\bfs.h
 	"Graph.h"
 	"vector"
 
-1578307543 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\graph.h
+1578386139 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\graph.h
 	<vector>
 	"time.h"
 	"Vertex.h"
@@ -338,42 +338,43 @@
 	<fstream>
 	<list>
 
-1578308552 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\vertex.h
+1578385113 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\vertex.h
 
-1578330127 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\edge.h
+1578384605 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\edge.h
 	"Vertex.h"
 
-1578296950 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\dfs.cpp
+1578385891 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\dfs.cpp
 	"DFS.h"
 	"Graph.h"
 	<iostream>
 
-1578296950 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\dfs.h
+1578385891 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\dfs.h
 	"Graph.h"
 
-1578296950 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\dijkstra.cpp
+1578386214 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\dijkstra.cpp
 	"Dijkstra.h"
 	"Graph.h"
 	<iostream>
 
-1578296950 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\dijkstra.h
+1578384605 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\dijkstra.h
 	"Graph.h"
 
-1578330150 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\edge.cpp
+1578384605 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\edge.cpp
 	"Edge.h"
 	"Vertex.h"
 
-1578296950 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\floyd_warshall.cpp
+1578385374 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\floyd_warshall.cpp
 	"Floyd_Warshall.h"
 	<iostream>
 
-1578296950 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\floyd_warshall.h
+1578384605 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\floyd_warshall.h
 	"Graph.h"
 
-1578309260 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\graph.cpp
+1578386139 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\graph.cpp
 	"Graph.h"
 	"Vertex.h"
 	"BFS.h"
+	"Floyd_Warshall.h"
 	<vector>
 	<time.h>
 	<cstdlib>
@@ -383,7 +384,7 @@
 	<fstream>
 	<list>
 
-1578315188 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\main.cpp
+1578401347 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\main.cpp
 	<iostream>
 	<string>
 	<sstream>
@@ -397,16 +398,17 @@
 	"TopologicalSort.h"
 	"MinHeap.h"
 	"Floyd_Warshall.h"
+	"Strongly_Related.h"
 
-1578296950 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\topologicalsort.h
+1578384605 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\topologicalsort.h
 	"Graph.h"
 	<stack>
 
-1578327363 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\minheap.h
+1578401922 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\minheap.h
 	"Graph.h"
 	"BFS.h"
 
-1578329660 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\minheap.cpp
+1578401562 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\minheap.cpp
 	"MinHeap.h"
 	"Graph.h"
 	"BFS.h"
@@ -414,15 +416,16 @@
 	"Edge.h"
 	<iostream>
 
-1578300269 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\topologicalsort.cpp
+1578386139 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\topologicalsort.cpp
 	"Graph.h"
 	<iostream>
 	<stack>
 
-1578308552 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\vertex.cpp
+1578385273 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\vertex.cpp
 	"Vertex.h"
+	<iostream>
 
-1578329341 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\kruskal.cpp
+1578384606 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\kruskal.cpp
 	"Graph.h"
 	"MinHeap.h"
 	"DisjointSet.h"
@@ -430,8 +433,18 @@
 
 1578313585 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\disjointpointsetunion.cpp
 
-1578326705 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\disjointset.cpp
+1578384605 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\disjointset.cpp
 	"DisjointSet.h"
 
-1578326748 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\disjointset.h
+1578384605 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\disjointset.h
+
+1578401310 c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\strongly_related.h
+	"Graph.h"
+	"DFS.h"
+	"stack"
+
+1578401347 source:c:\users\julia\desktop\ecole\utbm\cours\branche\info 1\ag44\graphs-a2019\graph_ag\strongly_related.cpp
+	"Strongly_Related.h"
+	"DFS.h"
+	<iostream>
 

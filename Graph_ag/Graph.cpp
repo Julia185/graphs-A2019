@@ -1,6 +1,7 @@
 #include "Graph.h"
 #include "Vertex.h"
 #include "BFS.h"
+#include "Floyd_Warshall.h"
 
 #include <vector>
 #include <time.h>
@@ -54,6 +55,46 @@ void Graph::genererMatrice(){
         int i = ListEdge[k]->source->id;
         int j = ListEdge[k]->destination->id;
         Adj[i][j]=c;
+    }
+}
+
+void Graph::genererDistVertex(){
+    int k=0;
+    for (int i=0;i<nb_vertex;i++){
+        ListVertex[i]->distance = new int[nb_vertex];
+    }
+
+    Floyd_Warshall(this);
+    cout<<" \t";
+
+    for (int i =0;i<nb_vertex;i++)
+        cout<<i<<"\t";
+    cout<<endl;
+
+    for (int i =0;i<nb_vertex;i++){
+        cout<<i<<"\t";
+        for (int j =0;j<nb_vertex;j++)
+                if(ListVertex[i]->distance[j]==INT_MAX) cout <<"INF\t";
+                else cout<<ListVertex[i]->distance[j]<<"\t";
+        cout<<endl;
+    }
+    cout<<endl;
+}
+
+
+Graph::Graph(const Graph& other){
+    if (this != &other) {
+            this->nb_vertex = other.nb_vertex;
+            this->nb_edge = other.nb_edge;
+
+            this->ListVertex = other.ListVertex;
+            this->ListEdge = other.ListEdge;
+
+            for (int i =0;i<nb_vertex;i++)
+                delete[] Adj[i];
+            delete[] Adj;
+
+            genererMatrice();
     }
 }
 

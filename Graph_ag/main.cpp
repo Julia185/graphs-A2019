@@ -12,6 +12,7 @@
 #include "TopologicalSort.h"
 #include "MinHeap.h"
 #include "Floyd_Warshall.h"
+#include "Strongly_Related.h"
 
 using namespace std;
 
@@ -24,16 +25,20 @@ int main()
     Graph* B = new Graph();
     B->genererMatrice();
     B->afficher();
+    B->genererDistVertex();
 
 
     vector<int> v;
     v = BFS(B,0);
 
-    DFS(B,1);
+    DFS(B,0);
 
     Dijkstra(B,0);//si affiche INF = infini
 
-    //TopologicalSort(B);
+    TopologicalSort(B);
+
+    Strongly_Related(B);
+
 
    /* MinHeap(B.ListEdge, B.nb_vertex, B.nb_edge); //construct add(i)--> avoir voisin
 
@@ -43,8 +48,7 @@ int main()
     {
         cout<<h.table[i]<<" | ";
     }
-
-    ///Floyd_Warshall(B); */
+    */
 
     return 0;
 }

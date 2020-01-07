@@ -1,4 +1,7 @@
 #include "Vertex.h"
+#include <iostream>
+
+using namespace std;
 
 Vertex::Vertex(int _id, int _cost, int _nbNeighbor)
 {
@@ -7,7 +10,9 @@ Vertex::Vertex(int _id, int _cost, int _nbNeighbor)
        this->nbNeighbor = _nbNeighbor;
 
 }
-Vertex::~Vertex(){}
+Vertex::~Vertex(){
+    delete[] distance;
+}
 
 Vertex::getNbNeighbor()const {
     return nbNeighbor;
@@ -15,5 +20,9 @@ Vertex::getNbNeighbor()const {
 
 int* Vertex::getVoisin(){
     return this->voisin;
+}
+
+void Vertex::Cost(int _id,int dist){
+    distance[_id] = dist;
 }
 

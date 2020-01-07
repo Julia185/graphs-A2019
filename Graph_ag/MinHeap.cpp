@@ -30,7 +30,7 @@ MinHeap::MinHeap(vector<Edge*> vect, int cap, int nbE) {
 	this->nb_element = nbE;
 
 	for(i = 0; i < nbE; ++i) {
-		table[i] = vect[i];
+		table[i] = *(vect[i]);
 	}
 
 	//int j = (nb_element - 2) / 2;
@@ -124,6 +124,18 @@ void MinHeap::deleteMin() {
 	--nb_element;
 }
 
+int MinHeap::TakeMin(){
+
+    if (isEmpty()) cout<<"Empty heap"<<endl;
+
+    // Store the minimum value, and remove it from heap
+    int root = table[1];
+    table[1] = table[nb_element];
+    nb_element--;
+    OrganizeHeap(1);
+
+    return root;
+}
 
 
 
@@ -227,7 +239,9 @@ void MinHeap::AddElement(int k)
     }
 }
 
-int MinHeap::TakeMin(){
+*/
+
+int MinHeap::getMin(){
 
     if (isEmpty()) cout<<"Empty heap"<<endl;
 
@@ -242,5 +256,5 @@ int MinHeap::TakeMin(){
 
 
 
-*/
+
 
