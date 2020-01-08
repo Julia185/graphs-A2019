@@ -14,7 +14,6 @@
 
 class Graph
 {
-
     public:
         int nb_vertex;
         int nb_edge;
@@ -33,6 +32,13 @@ class Graph
         void afficher();
         void genererDistVertex();
         void genererMatrice();
+        Edge* verifEdge_o(Vertex*,Vertex*);
+        Edge* verifEdge_n(Vertex*,Vertex*);
+
+        void matrix2list_o();
+        void matrix2list_n();
+        void list2matrix_n();
+        void list2matrix_o();
 
         std::vector<Vertex*>& getVertices();
         std::vector<Edge*>& getEdges();

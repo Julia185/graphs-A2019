@@ -13,6 +13,7 @@
 #include "MinHeap.h"
 #include "Floyd_Warshall.h"
 #include "Strongly_Related.h"
+#include "kruskal.h"
 
 using namespace std;
 
@@ -35,9 +36,17 @@ int main()
 
     Dijkstra(B,0);//si affiche INF = infini
 
+    cout << endl;
+
     TopologicalSort(B);
 
+    cout << endl;
+
     Strongly_Related(B);
+
+    cout << endl;
+
+    //kruskal(B);
 
 
    /* MinHeap(B.ListEdge, B.nb_vertex, B.nb_edge); //construct add(i)--> avoir voisin

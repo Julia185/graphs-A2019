@@ -1,153 +1,117 @@
 #include"Graph.h"
 #include "MinHeap.h"
+#include "kruskal.h"
 #include "DisjointSet.h"
 #include <iostream>
 
 using namespace std;
 
 
-int kruskal(Graph& G) {
+int kruskal(Graph* G){
 
     cout << "Kruskal Algorithm : " << endl;
+    cout << "MST :" << endl << "Edge \tWeight" << endl;
 
-	MinHeap MH = MinHeap(G.ListEdge, G.ListEdge.capacity(), G.ListEdge.size());
+    //Initialisation
+	int mstWeight = 0;
+	vector<Edge*> liste = G->ListEdge;
+	liste = sortingCost(liste);
 
-	//création pointeur
-	int* vertexK = new int[G.ListVertex.size()];
 
-	for (int i = 0; i < G.ListVertex.size(); ++i) {
-		vertexK[i] = (G.ListVertex[i]->id);
+	for(int i = 0; i < liste.size(); ++i){
+		Vertex* u = liste[i]->source;
+		Vertex* v = liste[i]->destination;
+
+		Vertex* set_u; // = Find(u);
+		Vertex* set_v; // = Find(v);
+
+		//on vérifie qu'ils n'appartiennent pas au même set
+		if (set_u != set_v)
+		{
+            //on affiche l'edge car il sera dans le MST
+			cout << u->id << " - " << v->id << "\t" << liste[i]->cost << endl;
+
+			//on update le résultat
+			mstWeight = mstWeight + liste[i]->cost;
+
+			// Merge two sets
+			//Union(liste[i]);
+		}
 	}
 
-
-	DisjointSet ds = DisjointSet(G.ListVertex.size());
-	unsigned int compteur = 0;
-
-	Edge t;
-
-	while (compteur != G.ListVertex.size()-1) {
-		t = MH.TakeMin();
-
-		if (ds.diff(t.destination->id, t.source->id)) {//if in different sets
-			cout << "Edge: " << t.id << ",Weight: " << t.cost << ",Connecting vertex " << t.source->id+1 << ",vertex " << t.destination->id+1 << endl;
-			ds.Union(t.destination->id, t.source->id);
-		}
-		else {
-			continue;
-		}
-
-		MH.deleteMin();
-		compteur++;
+	for (int i = 0; i < G->nb_vertex; ++i) {
+		G->ListVertex[i];
+		//->setParent(G->ListVertex[i]);
 	}
+	return mstWeight;
 }
 
 
+///Fonction qui tri les edges en fonction de leur coût (du min au plus)
+vector<Edge*> sortingCost(vector<Edge*> _ListEdge) {
+	//attribut dont on aura besoin
+	vector<Edge*> listEdge_sorted;
+	listEdge_sorted.push_back(_ListEdge[0]);
+	int counter = 0;
+	bool test;
 
 
+	for (int i = 1; i < _ListEdge.size(); ++i) {
+		test = true;
 
-
-
-
-    /*
-
-    Graph G2(G1.nb_vertex);
-    G1.sortEdge();
-
-    int id;
-
-    for(int i=0, j=0; (i < (G1.nb_vertex)-1) && (j < (G1.nb_edge)) ; j = j+2) {
-            //                                              ici rajouter avant ==0
-        if((G2.getVertices()[G1.getEdges()[j].getSrc().id-1].nbNeighbor == 0) || (G2.getVertices()[G1.getEdges()[j].destination.(id-1)].nbNeighbor == 0)){
-            G2.addEdgeSD(G1.getEdges()[j].getSrc().id, G1.getEdges()[j].getDest()->id, G1.getEdges()[j].cost(), id);
-            G2.addEdgeSD(G1.getEdges()[j].getDest().id, G1.getEdges()[j].getSrc().id, G1.getEdges()[j].cost(), id+1);
-            ++i;
-            id = id+2;
-        }
-    }
-
-    G2.MatrixFromEdges();
-    ///On affiche la matrice obtenue
-    G2.afficher();
-
+		while (test){
+			if (counter == listEdge_sorted.size()) {
+				counter = 0;
+				test = 0;
+				listEdge_sorted.push_back(_ListEdge[i]);
+			}
+			else {
+				if (listEdge_sorted[counter]->cost > _ListEdge[i]->cost) {
+					listEdge_sorted.insert(listEdge_sorted.begin() + (counter+1), listEdge_sorted[counter]);
+					listEdge_sorted[counter] = _ListEdge[i];
+					counter = 0;
+					test = 0;
+				}
+				else {
+					counter++;
+				}
+			}
+		}
+	}
+	return listEdge_sorted;
 }
 
-
-    void kruskalMST(int cost[][G.nb_vertex])
+/*
+///Fonction qui fait l'union de
+void Union(Edge* e)
 {
-    int minCost = 0; // Cost of min MST
 
-    // Initialize sets of disjoint sets.
-    for (int i = 0; i < G.nb_vertex; i++)
-        parent[i] = i;
+	Vertex* x = e->source()->getParent();
+	Vertex* y = e->destination->getParent();
 
-    // Include minimum weight edges one by one
-    int edge_count = 0;
+	// Make tree with smaller height a subtree of the other tree
+	if (x->getRank() > y->getRank())
+		y->getParent()->setParent(x);
+	else // If rnk[x] <= rnk[y]
+		x->getParent()->setParent(y);
 
-    while (edge_count < G.nb_vertex - 1) {
-        int minimum = INT_MAX, a = -1, b = -1;
-        for (int i = 0; i < V; i++) {
-            for (int j = 0; j < V; j++) {
-                if (Find(i) != Find(j) && cost[i][j] < minimum) {
-                    minimum = cost[i][j];
-                    a = i;
-                    b = j;
-                }
-            }
-        }
+	if (x->getRank() == y->getRank())
+		y->setRank(y->getRank() + 1);
 
-        union1(a, b);
-        printf("Edge %d:(%d, %d) cost:%d \n",
-               edge_count++, a, b, min);
-        mincost += min;
-    }
-    printf("\n Minimum cost= %d \n", mincost);
 }
 
 
 
+///Fonction qui cherche un vertex
+Vertex* Find(Vertex* _u)
+{
+	Vertex* u = _u;
+	Vertex* res = u->getParent();
 
-
-
-
-
-
-
-
-
-    //On initialise le résultat
-    int mstWeight = 0;
-
-    //on trie les edges en fonction du coût
-    G.sortEdge();
-
-    //Create disjoint sets
-    DisjointSet ds(G.nb_vertex);
-
-    for (int i = G.ListEdge.begin(); i != G.ListEdge.end(); i+=2)
-    {
-        int u = i;
-        int v = i->second.second;
-
-        int set_u = ds.Find(u);
-        int set_v = ds.Find(v);
-
-        // Check if the selected edge is creating
-        // a cycle or not (Cycle is created if u
-        // and v belong to same set)
-        if (set_u != set_v)
-        {
-            // Current edge will be in the MST so print it
-            cout << u << " - " << v << endl;
-
-            // Update MST weight
-            mstWeight += i->first;
-
-            // Merge two sets
-            ds.Union(set_u, set_v);
-        }
-    }
-
-    return mstWeight;
+    //parent de u pointe vers parent de u
+	if (u != u->getParent())
+		res->setParent(Find(res->getParent()));
+	return res->getParent();
 }
 
 */

@@ -15,7 +15,7 @@
 
 using namespace std;
 
-Graph::Graph( int _nb_vertex )
+Graph::Graph(int _nb_vertex)
 {
     this->nb_vertex = _nb_vertex;
 
@@ -100,7 +100,7 @@ Graph::Graph(const Graph& other){
 
 
 void Graph::afficher(){
-
+    cout << "Matrix of the Graph :" << endl;
     cout<<" \t";
     for (int i =0;i<nb_vertex;i++)
         cout<<i<<"\t";
@@ -221,6 +221,16 @@ void Graph::addEdgeSD(int src,int dest,int cost, int id){
     addEdge(v1, v2, cost, id);
 }
 */
+
+///Fonction qui vérifie que deux vertices sont bien reliés par un edge
+Edge* Graph::verifEdge_o(Vertex* source, Vertex* destination) {
+	for(int i=0; i<ListEdge.size(); ++i) {
+		if((ListEdge[i]->source == source) && (ListEdge[i]->destination == destination)) {
+			return ListEdge[i];
+		}
+	}
+	return NULL;
+}
 
 ///fonction qui détecte la fin d'une ligne dans un fichier
 bool endLine (ifstream& fichier){
@@ -447,3 +457,84 @@ bool Graph::graph_connexe(Graph* G){
     if(G->nb_vertex == value) return 1;
     else return 0;
 }
+
+/*
+///Fonction qui convertit une matrice en liste (graphe o)
+void Graph::matrix2list_o(){
+    //on crée le vector
+	vector<Vertex*> vertex;
+
+	for(unsigned int i=0; i < nb_vertex; ++i) {
+    Adj->push_back(vertex);
+
+		//build an adjacency list from the adjacency matrix
+		for (unsigned int j = 0; j < nb_vertex; ++j) {
+			if(Adj[i][j] == 1) {
+				Adj[i].push_back(ListVertex[j]);
+			}
+		}
+	}
+}
+
+
+///Fonction qui convertit une matrice en liste (Graphe n)
+void Graph::matrix2list_n(){
+    //création du vector
+	vector<Vertex*> vertex;
+
+	for(unsigned int i=0; i < nb_vertex; ++i) {
+        //on l'ajoute à la liste
+		Adj.push_back(vertex);
+
+		for (unsigned int j=0; j < i+1; ++j) {
+			if(Adj[i][j] == 1) {
+				Adj[i].push_back(ListVertex[j]);
+			}
+		}
+
+		for (unsigned int j=i; j < nb_vertex; ++j) {
+			if((Adj[j][i] == 1) && (i != j)) {
+				Adj[i].push_back(ListVertex[j]);
+			}
+		}
+	}
+}
+
+
+///Fonction qui convertit une liste en matrice (Graph o)
+void Graph::list2matrix_o() {
+	vector<int> vect;
+
+	for (unsigned int i = 0; i < nb_vertex; ++i) {
+		Adj.push_back(vect);
+
+		for (unsigned int j = 0; j < nb_vertex; ++j) {
+			if(verifEdge_o(ListVertex[i],ListVertex[j]) != NULL) {
+				Adj[i].push_back(1);
+			}
+			else {
+                Adj[i].push_back(0);
+            }
+		}
+	}
+}
+
+
+///Fonction qui convertit une liste en matrice (Graph n)
+void Graph::list2matrix_n() {
+	vector<int> vect;
+
+	for (unsigned int i = 0; i < nb_vertex; ++i) {
+		ListVertex.push_back(vect);
+
+		for (unsigned int j = 0; j < i; ++j) {
+			if(is_n_edge(ListVertex[i],ListVertex[j]) != NULL) {
+                Adj[i].push_back(1);
+			}
+			else {
+                Adj[i].push_back(0);
+            }
+		}
+	}
+}
+*/

@@ -62,10 +62,12 @@ void Dijkstra(Graph* G,int ID){
             if (pred[i] == INT_MAX || dist[i] == INT_MAX)
             {
                  if(pred[i] == INT_MAX && dist[i] != INT_MAX )
-                 cout<<i<< " \t\t " << dist[i] << "\t\t\t INF"<<endl;
+                    cout<<i<< " \t\t " << dist[i] << "\t\t\t INF"<<endl;
+                 else
+                    cout<<i<< " \t\t INF \t\t\t  INF"<<endl;
             }
             else {
-                cout<<i<< " \t\t INF \t\t\t  INF"<<endl;
+                cout<<i<< " \t\t " << dist[i] << "\t\t\t" << pred[i] << endl;
             }
     }
 }

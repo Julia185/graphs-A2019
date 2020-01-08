@@ -23,3 +23,8 @@ Edge& Edge::operator=(const Edge& ed) {
 	}
 	return *this;
 }
+
+Edge::~Edge(){
+    delete destination;
+    delete source;
+}
