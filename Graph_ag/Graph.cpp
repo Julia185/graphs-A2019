@@ -1,7 +1,7 @@
 #include "Graph.h"
 #include "Vertex.h"
-#include "BFS.h"
 #include "Floyd_Warshall.h"
+#include "BFS.h"
 
 #include <vector>
 #include <time.h>
@@ -15,14 +15,14 @@
 
 using namespace std;
 
-Graph::Graph(int _nb_vertex)
+Graph::Graph( int _nb_vertex )
 {
     this->nb_vertex = _nb_vertex;
     this->nb_edge = 0;
 
     for (int i=0;i<nb_vertex; ++i)
     {
-        Vertex* v = new Vertex(i, 0, 0);
+        Vertex* v = new Vertex(i);
         ListVertex.push_back(v);
     }
     srand(time(NULL));
@@ -42,12 +42,6 @@ Graph::Graph(int _nb_vertex)
         }
     }
 
-    for (int i =0;i<nb_vertex;i++){
-        for (int j =0;j<nb_vertex;j++){
-            if(Adj[i][j]!=0)
-                nb_edge= nb_edge+1;
-        }
-    }
 }
 
 void Graph::genererMatrice(){
@@ -64,51 +58,61 @@ void Graph::genererMatrice(){
         int j = ListEdge[k]->destination->id;
         Adj[i][j]=c;
     }
+
+     for (int i =0;i<nb_vertex;i++){
+              for (int j =0;j<nb_vertex;j++){
+                if(Adj[i][j]!=0)
+                 nb_edge= nb_edge+1;
+              }
+     }
+
 }
 
 void Graph::genererDistVertex(){
-    int k=0;
-    for (int i=0;i<nb_vertex;i++){
-        ListVertex[i]->distance = new int[nb_vertex];
-    }
 
-    Floyd_Warshall(this);
-    cout<<" \t";
+   for (int i =0;i<nb_vertex;i++){
+        for (int j =0;j<nb_vertex;j++){
+                if(Adj[i][j]!=0){
+                 ListVertex[i]->ListNeighbour.push_back(j);
+                }
 
-    for (int i =0;i<nb_vertex;i++)
-        cout<<i<<"\t";
-    cout<<endl;
+        }
+   }
+
+
+    cout<<"Vertex\t neighbour list with id of neighbours"<<endl;
 
     for (int i =0;i<nb_vertex;i++){
-        cout<<i<<"\t";
-        for (int j =0;j<nb_vertex;j++)
-                if(ListVertex[i]->distance[j]==INT_MAX) cout <<"INF\t";
-                else cout<<ListVertex[i]->distance[j]<<"\t";
+        cout<<i<<"   \t";
+        for (int j =0;j<ListVertex[i]->ListNeighbour.size();j++)
+                cout<<ListVertex[i]->ListNeighbour[j]<<" ";
         cout<<endl;
     }
     cout<<endl;
+
 }
 
-
 Graph::Graph(const Graph& other){
-    if (this != &other) {
-            this->nb_vertex = other.nb_vertex;
-            this->nb_edge = other.nb_edge;
+    if (this != &other)
+            {
+                this->nb_vertex = other.nb_vertex;
+                this->nb_edge = other.nb_edge;
 
-            this->ListVertex = other.ListVertex;
-            this->ListEdge = other.ListEdge;
+                this->ListVertex = other.ListVertex;
+                this->ListEdge = other.ListEdge;
 
-            for (int i =0;i<nb_vertex;i++)
-                delete[] Adj[i];
-            delete[] Adj;
+                 for (int i =0;i<nb_vertex;i++)
+                    delete[] Adj[i];
+                 delete[] Adj;
 
-            genererMatrice();
-    }
+                 genererMatrice();
+            }
+
 }
 
 
 void Graph::afficher(){
-    cout << "Matrix of the Graph :" << endl;
+
     cout<<" \t";
     for (int i =0;i<nb_vertex;i++)
         cout<<i<<"\t";
@@ -124,10 +128,10 @@ void Graph::afficher(){
 }
 
 Graph::Graph(){
+     this->nb_edge = 0;
     /// lecture fichier puis construction graph
-    this->nb_edge = 0;
     ifstream FICH("file.txt");
-    cout << "res de file2graph : " << this->file2graph(FICH) <<endl;
+    cout << "adjency matrix of Graph :" << this->file2graph(FICH) <<endl;
 
 }
 
@@ -140,106 +144,6 @@ Graph::~Graph(){
     delete[] Adj;
 }
 
-///REVOIR CES 2 FONCTIONS
-
-vector<Vertex*>& Graph::getVertices() {
-    return ListVertex;
-}
-
-vector<Edge*>& Graph::getEdges() {
-    return ListEdge;
-}
-
-
-/*
-///Création d'une matrice à partir de la liste d'Edges
-void Graph::MatrixFromEdges(Graph G) {
-    cout << "Creation of the matrix from the edges : " << endl;
-
-    for(int i = 0; i<G.nb_vertex; ++i)
-    {
-        Vertex* v = new Vertex(i, 0, 0);
-        ListVertex.push_back(v);
-    }
-
-    Matrix = new int* [G.nb_vertex];
-
-    for(int i = 0; i < nb_vertex(); ++i) {
-        Matrix[i] = new int[nb_vertex];
-    }
-
-    for(int i = 0; i<nb_edges();i++)
-    {
-        Matrix[listEdge[i].get_src().iden()-1][listEdge[i].get_dest().iden()-1]=listEdge[i].get_cost();
-        //cout<<listEdge[i].get_cost();
-    }
-}
-*/
-///Fonction qui trie ordre croissant
-void Graph::sortEdge() {
-    int length = nb_edge;
-
-    for (int i = 0; i < length-1; ++i) {
-        for (int j = 0; j < length-1-i; ++j) {
-            if ((ListEdge[j]->cost) > (ListEdge[j+1]->cost)) {
-                Edge* p = ListEdge[j+1];
-                ListEdge[j+1] = ListEdge[j];
-                ListEdge[j] = p;
-            }
-        }
-    }
-}
-
-
-///Fonction qui vérifie qu'un vertex est bien dans la liste
-int Graph::verifV(int ID, Vertex*& v){
-    for(int i=0; i<nb_vertex; ++i) {
-        if (ListVertex[i]->id == ID) {
-            v = ListVertex[i];
-            return 1;
-        }
-    }
-    return 0;
-}
-
-
-/*
-///Fonction qui ajoute un Edge dans la liste
-void Graph::addEdge(Vertex* src, Vertex* dest, int cost, int id) {
-    //création d'un edge
-    Edge* e = new Edge(id, src, dest, cost);
-    //ajout dans la liste
-    ListEdge.push_back(e);
-}
-
-
-
-///Fonction qui utilise addEdge
-void Graph::addEdgeSD(int src,int dest,int cost, int id){
-
-    ListVertex[src-1].add_nei(dest);
-
-    //création des deux vertices
-    Vertex* v1 = new Vertex(id, cost, );
-    Vertex* v2 = new Vertex();
-
-    //on vérifie qu'ils existent
-    verifV(src,v1);
-    verifV(dest,v2);
-
-    addEdge(v1, v2, cost, id);
-}
-*/
-
-///Fonction qui vérifie que deux vertices sont bien reliés par un edge
-Edge* Graph::verifEdge_o(Vertex* source, Vertex* destination) {
-	for(int i=0; i<ListEdge.size(); ++i) {
-		if((ListEdge[i]->source == source) && (ListEdge[i]->destination == destination)) {
-			return ListEdge[i];
-		}
-	}
-	return NULL;
-}
 
 ///fonction qui détecte la fin d'une ligne dans un fichier
 bool endLine (ifstream& fichier){
@@ -257,7 +161,7 @@ bool endLine (ifstream& fichier){
 
 int Graph::file2graph( ifstream& FICH )
 {
-    ///try fichier
+    ///try fichie
 
     if(FICH){
 
@@ -282,25 +186,30 @@ int Graph::file2graph( ifstream& FICH )
             if (nb_vertex <0 || (types[0]!='o' && types[0]!='n')  || (types[1]!='m' && types[1]!='l')) throw(-1);
             else throw(1);
         }catch(int nb){
-
-        if (nb!=1) exit (EXIT_FAILURE);  ///si pb dans création graph on stoppe
-        else
-            {
-                ///lecture fichier avec adjency matrix (directed or undirected) ==>graph_o_matrix
-                if ((types[0] =='o' || types[0] =='n' )&& types[1]=='m') {
-                    if (graph_o_matrix(FICH)!=1) exit (EXIT_FAILURE);
-                    else return (graph_o_matrix(FICH));
-                    }
+            if (nb!=1) exit (EXIT_FAILURE);  ///si pb dans création graph on stoppe
+            else
+                {
+                    ///lecture fichier avec adjency matrix (directed or undirected) ==>graph_o_matrix
+                    if ((types[0] =='o' || types[0] =='n' )&& types[1]=='m') {
+                        if (graph_o_matrix(FICH)!=1) exit (EXIT_FAILURE);
+                        else return (graph_o_matrix(FICH));
+                        }
                      else if ((types[0] =='o' || types[0] =='n' )&& types[1]=='l') {
                         if (graph_list(FICH) != 1) exit (EXIT_FAILURE);
                         else return (graph_list(FICH));
                     }
-        }
-        }
+
+
+                }}
+
+
     }
     else{
+
         return 0;
-    }
+
+        }
+
 }
 
 int Graph::graph_o_matrix(ifstream& FICH){
@@ -309,44 +218,51 @@ int Graph::graph_o_matrix(ifstream& FICH){
     int i;
     for(i=0;i<nb_vertex; ++i)
     {
-        Vertex* v = new Vertex(i, 0, 0);
+        Vertex* v = new Vertex(i);
         ListVertex.push_back(v);
+
     }
 
     int id=0;
 
     for (int i=0; i<nb_vertex; ++i)    {
 
-        lineX(FICH,i+3); //mis en place au niveau voulu
-        int compteur = 0;
-        int j = 0;
+            lineX(FICH,i+3); //mis en place au niveau voulu
 
-        string line; //string contenant la ligne de la matrix
-        getline(FICH, line);
+            int compteur = 0;
+            int j = 0;
 
-        int posEspace =0;
+            string line; //string contenant la ligne de la matrix
+            getline(FICH, line);
 
-        while (j<nb_vertex)
-        {
+            int posEspace =0;
 
-            posEspace = line.find(" ",posEspace+1);
-            string VALUE = line.substr(compteur,posEspace-compteur);
-            istringstream iss (VALUE);
-            int c = stringToInt(VALUE);
+            while (j<nb_vertex)
+            {
 
-            Edge* e = new Edge(id, c, ListVertex[i],ListVertex[j]);
-            ListEdge.push_back(e);
-            ++id;
-            ++j;
+                posEspace = line.find(" ",posEspace+1);
+                string VALUE = line.substr(compteur,posEspace-compteur);
+                istringstream iss (VALUE);
+                int c = stringToInt(VALUE);
 
-            //on se met après l'espace
-            compteur = compteur+(posEspace-compteur);
-        }
-    }
+                Edge* e = new Edge(id, c, ListVertex[i],ListVertex[j]);
+                ListEdge.push_back(e);
+                ++id;
+                ++j;
+
+                compteur = compteur+(posEspace-compteur); //on se met après l'espace
+
+            }
+
+
+
+            }
+
     }catch(exception const& e) {return 0;}
     throw 1;
     }catch(int nb){return nb;}
 }
+
 
 ///Crée un graph à partir d'une liste d'adjacence
 int Graph::graph_list(ifstream& File){
@@ -354,7 +270,7 @@ int Graph::graph_list(ifstream& File){
     try{///return 1 if it construct the graph
         for(int i = 0; i < nb_vertex; ++i){
             ///Création de la liste de vertices
-            Vertex* v = new Vertex(i, 0, 0);
+            Vertex* v = new Vertex(i);
             ListVertex.push_back(v);
         }
 
@@ -369,7 +285,6 @@ int Graph::graph_list(ifstream& File){
             string line;
             getline(File, line);
             int taille = line.size();
-            cout << endl << "taille de la ligne : " << taille << endl << endl;
 
             ///on se replace au début de la ligne
             File.seekg(0,ios::beg);
@@ -378,8 +293,6 @@ int Graph::graph_list(ifstream& File){
             do {
                 string morceau;
                 File >> morceau;
-                cout << "morceau : " << morceau << endl;
-
                 int p = morceau.size();
 
                 if(counter%2 == 0) {
@@ -393,15 +306,12 @@ int Graph::graph_list(ifstream& File){
                 }
 
                 compteur = compteur + p + 1;
-                cout << "compteur : " << compteur << endl << endl;
                 counter++;
                 id++;
             }
             while(compteur <= taille);
 
             compteur = 0;
-            cout << "On passe a la ligne suivante!" << endl << endl;
-            //cout << "Le vertex a " << (compteur-1)/2 << " voisin(s)" << endl;
         }
         return 1;
     }
@@ -451,9 +361,9 @@ void Graph::visited(int ID) {
 
 
 ///Fonction qui traverse le graph et compte le nb de vertices visités
-int Graph::pathes_prefixe(Graph* G){
+int Graph::pathes_prefixe(){
     vector<int> v;
-    v = BFS(G,0);
+    v = BFS(this,0);
 
     int nbVisited = v.size();
     return nbVisited;
@@ -461,89 +371,9 @@ int Graph::pathes_prefixe(Graph* G){
 
 
 ///Fonction qui vérifie la "relatedness" du graph
-bool Graph::graph_connexe(Graph* G){
-    int value = pathes_prefixe(G);
-    if(G->nb_vertex == value) return 1;
+bool Graph::graph_connexe(){
+    int value = pathes_prefixe();
+    if(nb_vertex == value) return 1;
     else return 0;
 }
 
-/*
-///Fonction qui convertit une matrice en liste (graphe o)
-void Graph::matrix2list_o(){
-    //on crée le vector
-	vector<Vertex*> vertex;
-
-	for(unsigned int i=0; i < nb_vertex; ++i) {
-    Adj->push_back(vertex);
-
-		//build an adjacency list from the adjacency matrix
-		for (unsigned int j = 0; j < nb_vertex; ++j) {
-			if(Adj[i][j] == 1) {
-				Adj[i].push_back(ListVertex[j]);
-			}
-		}
-	}
-}
-
-
-///Fonction qui convertit une matrice en liste (Graphe n)
-void Graph::matrix2list_n(){
-    //création du vector
-	vector<Vertex*> vertex;
-
-	for(unsigned int i=0; i < nb_vertex; ++i) {
-        //on l'ajoute à la liste
-		Adj.push_back(vertex);
-
-		for (unsigned int j=0; j < i+1; ++j) {
-			if(Adj[i][j] == 1) {
-				Adj[i].push_back(ListVertex[j]);
-			}
-		}
-
-		for (unsigned int j=i; j < nb_vertex; ++j) {
-			if((Adj[j][i] == 1) && (i != j)) {
-				Adj[i].push_back(ListVertex[j]);
-			}
-		}
-	}
-}
-
-
-///Fonction qui convertit une liste en matrice (Graph o)
-void Graph::list2matrix_o() {
-	vector<int> vect;
-
-	for (unsigned int i = 0; i < nb_vertex; ++i) {
-		Adj.push_back(vect);
-
-		for (unsigned int j = 0; j < nb_vertex; ++j) {
-			if(verifEdge_o(ListVertex[i],ListVertex[j]) != NULL) {
-				Adj[i].push_back(1);
-			}
-			else {
-                Adj[i].push_back(0);
-            }
-		}
-	}
-}
-
-
-///Fonction qui convertit une liste en matrice (Graph n)
-void Graph::list2matrix_n() {
-	vector<int> vect;
-
-	for (unsigned int i = 0; i < nb_vertex; ++i) {
-		ListVertex.push_back(vect);
-
-		for (unsigned int j = 0; j < i; ++j) {
-			if(is_n_edge(ListVertex[i],ListVertex[j]) != NULL) {
-                Adj[i].push_back(1);
-			}
-			else {
-                Adj[i].push_back(0);
-            }
-		}
-	}
-}
-*/

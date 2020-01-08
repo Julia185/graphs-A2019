@@ -3,26 +3,16 @@
 
 using namespace std;
 
-Vertex::Vertex(int _id, int _cost, int _nbNeighbor)
+Vertex::Vertex(int _id)
 {
        this->id = _id;
-       this->nbNeighbor = _nbNeighbor;
-       parent = this;
-
 }
+
+
 Vertex::~Vertex(){
-    delete[] distance;
+    //delete[] distance;
 }
-
-Vertex::getNbNeighbor()const {
-    return nbNeighbor;
-}
-
-int* Vertex::getVoisin(){
-    return this->voisin;
-}
-
-void Vertex::Cost(int _id,int dist){
+/*
+void Vertex::cost(int _id,int dist){
     distance[_id] = dist;
-}
-
+}*/

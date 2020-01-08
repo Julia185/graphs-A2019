@@ -1,9 +1,9 @@
+#include "TopologicalSort.h"
 #include "Graph.h"
 #include <iostream>
 #include <stack>
 
 using namespace std;
-
 
 ///Fonction qui visite le vertex
 void TopologicalSortUtil(int ID, Graph* G, stack<int>& Stack) {
@@ -15,9 +15,10 @@ void TopologicalSortUtil(int ID, Graph* G, stack<int>& Stack) {
             if(G->Adj[ID][i]!=0){
                 if(!G->isVisited(i)) TopologicalSortUtil(i, G, Stack);
             }
+        }
+        Stack.push(ID);
     }
-    Stack.push(ID);
-}
+
 
 
 void TopologicalSort(Graph* G){
@@ -40,4 +41,5 @@ void TopologicalSort(Graph* G){
         Stack.pop();
     }
     cout << endl;
+    cout<<endl;
 }

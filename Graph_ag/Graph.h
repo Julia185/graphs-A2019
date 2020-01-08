@@ -14,13 +14,16 @@
 
 class Graph
 {
+
     public:
-        int nb_vertex;
         int nb_edge;
+        int nb_vertex;
         std::vector<Vertex*> ListVertex;  //V
         std::vector<Edge*> ListEdge;      //E
 
         int** Adj;
+
+    public:
 
         /// Construtor
         Graph(int nb_vertex);
@@ -30,24 +33,8 @@ class Graph
 
         /// fonctions
         void afficher();
-        void genererDistVertex();
         void genererMatrice();
-        Edge* verifEdge_o(Vertex*,Vertex*);
-        Edge* verifEdge_n(Vertex*,Vertex*);
-
-        void matrix2list_o();
-        void matrix2list_n();
-        void list2matrix_n();
-        void list2matrix_o();
-
-        std::vector<Vertex*>& getVertices();
-        std::vector<Edge*>& getEdges();
-
-        void MatrixFromEdges();
-        void sortEdge();
-        void addEdge(Vertex*, Vertex*, int,int);
-        void addEdgeSD(int,int,int,int);
-        int verifV(int, Vertex*&);
+        void genererDistVertex();
 
 
         ///fichier lecture
@@ -63,8 +50,8 @@ class Graph
         void visited(int);
 
         ///Relatedness
-        int pathes_prefixe(Graph*);
-        bool graph_connexe(Graph*);
+        int pathes_prefixe();
+        bool graph_connexe();
 };
 
 #endif // GRAPH_H

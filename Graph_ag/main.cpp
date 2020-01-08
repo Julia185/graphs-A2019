@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <vector>
 
 #include "Edge.h"
 #include "Vertex.h"
@@ -9,66 +10,50 @@
 #include "Dijkstra.h"
 #include "BFS.h"
 #include "DFS.h"
-#include "TopologicalSort.h"
 #include "MinHeap.h"
 #include "Floyd_Warshall.h"
+#include "TopologicalSort.h"
 #include "Strongly_Related.h"
-#include "kruskal.h"
 #include "Prim.h"
+#include "kruskal.h"
+
 
 using namespace std;
 
 int main()
 {
+    /*graph random : */
     /*Graph* G = new Graph(3);
     G->genererMatrice();
     G->afficher();*/
-    cout << "test file"<< endl;
+
     Graph* B = new Graph();
     B->genererMatrice();
     B->afficher();
     B->genererDistVertex();
 
 
-    vector<int> v;
-    v = BFS(B,0);
+    Floyd_Warshall(B);
+
+    //BFS(B,0); no neeed because of graph connex
+    //print BFS too
+    if(!B->graph_connexe())cout<<"\n le graphe n'est pas connex" <<endl;
+    else cout<<"\n le graph est connex"<<endl;
+
 
     DFS(B,0);
 
     Dijkstra(B,0);//si affiche INF = infini
 
-    cout << endl;
-
     TopologicalSort(B);
-
-    cout << endl;
 
     Strongly_Related(B);
 
-    cout << endl;
-
     Prim(B);
 
-    cout << endl;
-
-    /*
-    vector<Edge*> listEdge_sorted;
-    listEdge_sorted = sortingCost(B);
-*/
-    cout << endl;
-
-    kruskal(B);
-
-
-   /* MinHeap(B.ListEdge, B.nb_vertex, B.nb_edge); //construct add(i)--> avoir voisin
-
-
-    cout<<"\n MinHeap  " ;
-    for (int i =1;i<=h.nb_element;i++)
-    {
-        cout<<h.table[i]<<" | ";
-    }
-    */
+    int msw_t;
+    msw_t= kruskal(B);
+     cout << "\nWeight of MST is " << msw_t;
 
     return 0;
 }

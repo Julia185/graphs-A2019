@@ -5,16 +5,16 @@ using namespace std;
 
 void Prim(Graph* G)
 {
-    cout << "Prim Algorithme : " << endl;
+
     int nb = 0;
     G->setAllUnvisited();
 
     G->visited(0);
      // print for edge and weight
-      cout << "Edge" << " : " << "Weight";
+        cout << "Prim : \nEdge" << " : " << "Weight";
       cout << endl;
 
-    // the number of egde in minimum spanning tree will be
+// the number of egde in minimum spanning tree will be
   // always less than (V -1), where V is number of vertices in
   //graph
     while (nb < G->nb_vertex-1) {
@@ -46,5 +46,7 @@ void Prim(Graph* G)
       G->visited(fin);
       nb++;
     }
+       cout << endl;
 
 }
+

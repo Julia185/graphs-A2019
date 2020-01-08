@@ -1,5 +1,5 @@
-#ifndef TOPOLOGICALSORT_H_INCLUDED
-#define TOPOLOGICALSORT_H_INCLUDED
+#ifndef TOPOLOGICALSORT_H
+#define TOPOLOGICALSORT_H
 
 #include "Graph.h"
 #include <stack>
@@ -8,4 +8,4 @@ void TopologicalSortUtil(int, Graph*, std::stack<int>&);
 
 void TopologicalSort(Graph*);
 
-#endif // TOPOLOGICALSORT_H_INCLUDED
+#endif // TOPOLOGICALSORT_H

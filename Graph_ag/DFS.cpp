@@ -5,6 +5,7 @@
 
 using namespace std;
 
+
 ///Fonction qui visite le vertex
 void dfs_util(Graph* G, int ID) {
 
@@ -15,7 +16,7 @@ void dfs_util(Graph* G, int ID) {
     for(int i =0; i< G->nb_vertex; ++i)
         {
             if(G->Adj[ID][i]!=0){
-                currVertex = i;
+             currVertex = i;
                 if(!G->isVisited(currVertex)) {
                     dfs_util(G,currVertex);
                 }
@@ -26,17 +27,16 @@ void dfs_util(Graph* G, int ID) {
 ///Fonction qui répète la fonction dfs_util
 void DFS(Graph* G,int ID) {
 
-     cout << "\n\n DFS starts at "<< ID << endl;
+     cout << "\n\n DFS starts at "<< ID <<endl;
 
-    //on note tous les vertices comme non visités
+    //on note tous les vertex comme non visités
     G->setAllUnvisited();
     //recursive call
     dfs_util(G,ID);
-
 }
 
 ///Fonction qui visite le vertex
-void dfs_util2(Graph& G, int ID) {
+void dfs_util_strong(Graph& G, int ID) {
 
     G.visited(ID);
     cout << " " << ID << " ";
@@ -47,8 +47,9 @@ void dfs_util2(Graph& G, int ID) {
             if(G.Adj[ID][i]!=0){
              currVertex = i;
                 if(!G.isVisited(currVertex)) {
-                    dfs_util2(G,currVertex);
+                    dfs_util_strong(G,currVertex);
                 }
             }
     }
 }
+

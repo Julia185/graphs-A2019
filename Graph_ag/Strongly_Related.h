@@ -1,5 +1,5 @@
-#ifndef STRONGLY_RELATED_H_INCLUDED
-#define STRONGLY_RELATED_H_INCLUDED
+#ifndef STRONGLY_RELATED_H
+#define STRONGLY_RELATED_H
 
 #include "Graph.h"
 #include "DFS.h"
@@ -7,4 +7,4 @@
 
 void Strongly_Related(Graph*);
 
-#endif // STRONGLY_RELATED_H_INCLUDED
+#endif // STRONGLY_RELATED_H

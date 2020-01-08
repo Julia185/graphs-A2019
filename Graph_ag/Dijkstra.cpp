@@ -7,7 +7,7 @@ using namespace std;
 //pick the vertex ith = the minimum vertex
 int minDistance(Graph* G,int dist[]) {
     // Initialize min value
-    int mini=INT_MAX, min_index = 0;
+    int mini=INT_MAX, min_index;
 
     for (int v = 0; v < G->nb_vertex; v++){
         if (!G->isVisited(v) && dist[v] < mini){
@@ -56,19 +56,21 @@ void Dijkstra(Graph* G,int ID){
 
     }
 
-    cout<<"\n\n Dijkstra : \nVertex \t\t Distance from src  \tPredecessor\n";
-    cout <<"if INF apparait = 0 lien avec la source\n";
+    cout<<"\n\n Dijkstra : if INF apparait = no lien avec la source\n"
+         <<"\nVertex \t\t Distance from src  \tPredecessor\n";
     for (int i = 0; i < G->nb_vertex; i++){
-            if (pred[i] == INT_MAX || dist[i] == INT_MAX)
-            {
+             if (pred[i] == INT_MAX || dist[i] == INT_MAX)
+             {
                  if(pred[i] == INT_MAX && dist[i] != INT_MAX )
-                    cout<<i<< " \t\t " << dist[i] << "\t\t\t INF"<<endl;
+                 cout<<i<< " \t\t " << dist[i] << "\t\t\t INF"<<endl;
                  else
-                    cout<<i<< " \t\t INF \t\t\t  INF"<<endl;
-            }
-            else {
-                cout<<i<< " \t\t " << dist[i] << "\t\t\t" << pred[i] << endl;
-            }
+                cout<<i<< " \t\t INF \t\t\t  INF"<<endl;
+             }
+            else
+            cout<<i<< " \t\t " << dist[i] << "\t\t\t "<<pred[i]  <<endl;
     }
+
+
+    cout <<endl;
 }
 

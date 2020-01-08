@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Edge::Edge(){}
+Edge::Edge(){};
 
 Edge::Edge(int _id, int _cost, Vertex* src, Vertex* dest)
 {
@@ -25,6 +25,6 @@ Edge& Edge::operator=(const Edge& ed) {
 }
 
 Edge::~Edge(){
-    delete destination;
     delete source;
+    delete destination;
 }
