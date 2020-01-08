@@ -47,13 +47,14 @@ int main()
 
     cout << endl;
 
-     Prim(B);
+    Prim(B);
 
     cout << endl;
 
+    /*
     vector<Edge*> listEdge_sorted;
-    listEdge_sorted = sortingCost(B->ListEdge);
-
+    listEdge_sorted = sortingCost(B);
+*/
     cout << endl;
 
     kruskal(B);

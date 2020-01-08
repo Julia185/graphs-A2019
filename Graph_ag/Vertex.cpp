@@ -7,6 +7,7 @@ Vertex::Vertex(int _id, int _cost, int _nbNeighbor)
 {
        this->id = _id;
        this->nbNeighbor = _nbNeighbor;
+       parent = this;
 
 }
 Vertex::~Vertex(){

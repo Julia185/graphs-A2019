@@ -16,69 +16,64 @@ int kruskal(Graph* G){
 
     //Initialisation
 	int mstWeight = 0;
-	vector<Edge*> liste;
+	vector<Edge*> liste = G->ListEdge;
 
-	liste = sortingCost(liste);
+    liste = sortingCost(G);
 
-	///ajouter ici
+    for(unsigned int i = 0; i < liste.size(); ++i){
+        Vertex* u = liste[i]->source;
+        Vertex* v = liste[i]->destination;
 
-	for(int i = 0; i < liste.size(); ++i){
-        cout << endl << "Liste[" << i << "] :" <<  liste[i] << endl;
-	}
+        Vertex* set_u = Find(u);
+        Vertex* set_v = Find(v);
 
-	for(unsigned int i = 0; i < liste.size(); ++i){
-		Vertex* u = liste[i]->source;
-		Vertex* v = liste[i]->destination;
-
-		cout << endl << u->id << endl << v->cost;
-		cout << endl << "test";
-
-		Vertex* set_u = Find(u);
-		Vertex* set_v = Find(v);
-
-		//on vérifie qu'ils n'appartiennent pas au même set
-		if (set_u != set_v)
-		{
+        //on vérifie qu'ils n'appartiennent pas au même set
+        if (set_u != set_v)
+        {
             //on affiche l'edge car il sera dans le MST
-			cout << u->id << " - " << v->id << "\t" << liste[i]->cost << endl;
+            cout << u->id << " - " << v->id << "\t" << liste[i]->cost << endl;
 
-			//on update le résultat
-			mstWeight = mstWeight + liste[i]->cost;
+            //on update le résultat
+            mstWeight = mstWeight + liste[i]->cost;
 
-			// Merge two sets
-			Union(liste[i]);
-		}
-	}
+            // Merge two sets
+            Union(liste[i]);
+        }
+    }
 
-	for (int i = 0; i < G->nb_vertex; ++i) {
-		G->ListVertex[i]->parent = G->ListVertex[i];
-	}
-	return mstWeight;
+    for (int i = 0; i < G->nb_vertex; ++i) {
+        G->ListVertex[i]->parent = G->ListVertex[i];
+    }
+
+    cout << "Le MST a un poids de : " << mstWeight << endl;
+
+    return mstWeight;
 }
 
 
-///Fonction qui tri les edges en fonction de leur coût (du min au plus)
-vector<Edge*> sortingCost(vector<Edge*> _ListEdge) {
+
+///Fonction qui trie les edges en fonction de leur coût (du min au plus)
+vector<Edge*> sortingCost(Graph* G) {
 	//attributs dont on aura besoin
 	vector<Edge*> listEdge_sorted;
 	unsigned int counter = 0;
 	bool test;
 
-	listEdge_sorted.push_back(_ListEdge[0]);
+	listEdge_sorted.push_back(G->ListEdge[0]);
 
-	for (unsigned int i = 1; i < _ListEdge.size()/2; ++i) {
+	for (unsigned int i = 1; i < G->ListEdge.size()/2; ++i) {
             test = true;
 
             while (test){
                 if (counter == listEdge_sorted.size()) {
                     counter = 0;
                     test = false;
-                    listEdge_sorted.push_back(_ListEdge[i]);
+                    listEdge_sorted.push_back(G->ListEdge[i]);
                 }
                 else {
-                    if (listEdge_sorted[counter]->cost > _ListEdge[i]->cost) {
+                    if (listEdge_sorted[counter]->cost > G->ListEdge[i]->cost) {
                         listEdge_sorted.insert(listEdge_sorted.begin()+(counter+1), listEdge_sorted[counter]);
-                        listEdge_sorted[counter] = _ListEdge[i];
+                        listEdge_sorted[counter] = G->ListEdge[i];
                         counter = 0;
                         test = false;
                     }
@@ -89,29 +84,17 @@ vector<Edge*> sortingCost(vector<Edge*> _ListEdge) {
             }
 	}
 
+	/*
 	for(unsigned int i =0; i < listEdge_sorted.size(); ++i){
         cout << listEdge_sorted[i]->id << " - cost : " << listEdge_sorted[i]->cost << endl;
 	}
 
-
 	cout << "Nb d'edge trie " << listEdge_sorted.size() << endl;
+
+	*/
 
 	return listEdge_sorted;
 }
-
-/*
-
-		if(listEdge_sorted[i]->cost == listEdge_sorted[i+1]->cost){
-                    cout << endl << "fell" << endl;
-                if(listEdge_sorted[i]->source == listEdge_sorted[i+1]->destination){
-                    if(listEdge_sorted[i]->destination->id == listEdge_sorted[i+1]->source->id){
-                        listEdge_sorted.pop_back();
-                        cout << "test" << endl;
-                    }
-                }
-        }
-*/
-
 
 
 ///Fonction qui fait l'union en fonction du rank

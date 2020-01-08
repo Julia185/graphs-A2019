@@ -7,7 +7,7 @@
 
 int kruskal(Graph*);
 
-std::vector<Edge*> sortingCost(std::vector<Edge*>);
+std::vector<Edge*> sortingCost(Graph*);
 
 void Union(Edge*);
 
