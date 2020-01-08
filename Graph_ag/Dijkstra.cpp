@@ -7,7 +7,7 @@ using namespace std;
 //pick the vertex ith = the minimum vertex
 int minDistance(Graph* G,int dist[]) {
     // Initialize min value
-    int mini=INT_MAX, min_index;
+    int mini=INT_MAX, min_index = 0;
 
     for (int v = 0; v < G->nb_vertex; v++){
         if (!G->isVisited(v) && dist[v] < mini){

@@ -1,10 +1,8 @@
+#ifndef PRIM_H
+#define PRIM_H
+
 #include "Graph.h"
 
-#ifndef PRIM_H_INCLUDED
-#define PRIM_H_INCLUDED
+void Prim(Graph* G);
 
-void Prim(Graph*);
-
-void Prim(Graph*);
-
-#endif // PRIM_H_INCLUDED
+#endif // PRIM_H

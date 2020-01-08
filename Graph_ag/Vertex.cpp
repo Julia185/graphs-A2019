@@ -6,7 +6,6 @@ using namespace std;
 Vertex::Vertex(int _id, int _cost, int _nbNeighbor)
 {
        this->id = _id;
-       this->cost = _cost;
        this->nbNeighbor = _nbNeighbor;
 
 }

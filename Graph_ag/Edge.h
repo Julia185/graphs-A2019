@@ -2,6 +2,7 @@
 #define EDGE_H
 
 #include "Vertex.h"
+#include <vector>
 
 class Edge
 {
@@ -11,6 +12,7 @@ class Edge
         int cost;
         Vertex* source;
         Vertex* destination;
+        std::vector<Vertex*> vertex;
 
 
         //constructor

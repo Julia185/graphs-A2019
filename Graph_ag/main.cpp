@@ -14,6 +14,7 @@
 #include "Floyd_Warshall.h"
 #include "Strongly_Related.h"
 #include "kruskal.h"
+#include "Prim.h"
 
 using namespace std;
 
@@ -46,7 +47,16 @@ int main()
 
     cout << endl;
 
-    //kruskal(B);
+     Prim(B);
+
+    cout << endl;
+
+    vector<Edge*> listEdge_sorted;
+    listEdge_sorted = sortingCost(B->ListEdge);
+
+    cout << endl;
+
+    kruskal(B);
 
 
    /* MinHeap(B.ListEdge, B.nb_vertex, B.nb_edge); //construct add(i)--> avoir voisin

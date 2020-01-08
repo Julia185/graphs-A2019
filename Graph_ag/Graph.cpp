@@ -18,6 +18,7 @@ using namespace std;
 Graph::Graph(int _nb_vertex)
 {
     this->nb_vertex = _nb_vertex;
+    this->nb_edge = 0;
 
     for (int i=0;i<nb_vertex; ++i)
     {
@@ -36,10 +37,17 @@ Graph::Graph(int _nb_vertex)
                  Edge* e = new Edge(id,1,ListVertex[i],ListVertex[j]);
                  ListEdge.push_back(e);
                 ++id;
+                this->nb_edge++;
             }
         }
     }
 
+    for (int i =0;i<nb_vertex;i++){
+        for (int j =0;j<nb_vertex;j++){
+            if(Adj[i][j]!=0)
+                nb_edge= nb_edge+1;
+        }
+    }
 }
 
 void Graph::genererMatrice(){
@@ -117,6 +125,7 @@ void Graph::afficher(){
 
 Graph::Graph(){
     /// lecture fichier puis construction graph
+    this->nb_edge = 0;
     ifstream FICH("file.txt");
     cout << "res de file2graph : " << this->file2graph(FICH) <<endl;
 

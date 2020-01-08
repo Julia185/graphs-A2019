@@ -14,6 +14,9 @@ class Vertex
         int* voisin;
         int *distance; // distance[i] will hold the cost of the vertex with all the other vertex
 
+        unsigned int rnk;
+        Vertex* parent;
+
         //attribute
         Vertex(int,int,int);
         Vertex(){};
